@@ -16,6 +16,6 @@ app.use(express.urlencoded({extended:true}));
 app.use('/api',apiRouter)
 
 app.listen(process.env.PORT, process.env.HOST, () => {
-    console.log(`Servidor iniciado en http://${process.env.HOST}:${process.env.PORT}`);
+    console.log(`GATO Servidor iniciado en http://${process.env.HOST}:${process.env.PORT}`);
 });
 
