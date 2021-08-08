@@ -1,12 +1,16 @@
 const http = require('http');
 
 const express = require('express');
+const cors = require('cors')
+
 
 require('dotenv').config();
 
 const apiRouter = require('./routes/api');
 
 const app = express();
+app.use(cors())
+app.options('*', cors())
 require('./db');
 const bodyParser=require('body-parser');
 const { Ingreso } = require('./db');
