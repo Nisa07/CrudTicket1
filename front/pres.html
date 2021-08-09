@@ -31,13 +31,13 @@
 <body>
   <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
     <button id="btnCrear" type="button" class="btn btn-primary">Crear</button>
-    <h1>Ingresos</h1>
     <table id="tablaIngresos" class="table mt-2 table-dordered table-striped">
       <thead>
         <tr class="text-center">
           <th>ID</th>
-          <th>Concepto</th>
-          <th>Total</th>
+          <th>Fecha de creacion</th>
+          <th>Proyecto</th>
+          <th>Version</th>
         </tr>
       </thead>
       <tbody>
@@ -52,18 +52,14 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-dark text-white">
-          <h5 class="modal-title" id="exampleModalLabel">Ingresos</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Presupuesto</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form>
             <div class="mb-3">
-              <label for="concepto" class="col-form-label">Concepto</label>
-              <input id="concepto" type="text" class="form-control" autofocus>
-            </div>
-            <div class="mb-3">
-              <label for="total" class="col-form-label">Total</label>
-              <input id="total" type="number" class="form-control">
+              <label for="concepto" class="col-form-label">Proyecto</label>
+              <input id="proyecto" type="text" class="form-control" autofocus>
             </div>
         </div>
         <div class="modal-footer">
@@ -82,7 +78,7 @@
   <!-- JavaScript -->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
-  <script type="module" src="./index.js"></script>
+  <script type="module" src="./pres.js"></script>
 </body>
 
 </html>

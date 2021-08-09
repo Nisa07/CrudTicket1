@@ -4,6 +4,9 @@ const { response } = require('express');
 const { Usuarios }= require('../../db')// objeto
 const midd = require('../../Middlewares/midd.usuario')
 const usuariosService = require("../../Services/usuarios.services");
+
+
+
 router.post('/register', midd.checkDatosAlta ,async (req,res)=>{
     try {
         req.body.password =bcrypt.hashSync(req.body.password,10);
@@ -32,8 +35,7 @@ router.post('/register', midd.checkDatosAlta ,async (req,res)=>{
                 if (user) {
                     const iguales= bcrypt.compareSync(req.body.password, user.password);
                     if (iguales) {
-                        let validacion = await usuariosService.createToken(req.body);
-                        res.json(validacion)  
+                        res.json({ success: usuariosService.createToken(user) });  
                     }
                 } else {
                     res.json({ error: 'Error en usuario o contraseña'});
@@ -43,5 +45,5 @@ router.post('/register', midd.checkDatosAlta ,async (req,res)=>{
                 res.status(400).render('404', {msj: error.message , titulo: 'Error al ingresar'})
             }   
             })  
-        
-module.exports=router;
+module.exports=router;        
+

@@ -1,9 +1,10 @@
 //IMPORTO LOS MODULOS NECESARIOS
 //const usuariosService = require('../Services/usuarios.service')
-const jwt = require('jsonwebtoken')
+
 const Joi = require('joi');
 const { loginDTO } = require('../dto/users/login.dto');
 const { altaUserDTO } = require('../dto/users/alta.dto');
+const jwt = require('jwt-simple')
 
 /*module.exports.usuarioValido = async (req,res,next)=>{
     try {
@@ -39,17 +40,29 @@ module.exports.checkDatosAlta = async(req, res, next) => {
 }
 
 module.exports.checkToken= async(req,res,next)=> {
-    try {
+    
         if (!req.headers['user-token']) {
-            return res.json({ error: 'Necesitas incluir el token'})
+            return res.json({ error: 'Necesitas incluir el token'});
             
         }
     const userToken= req.headers['user-token']
-    let payload = jwt.verify(userToken,process.env.SECRET_KEY)
-        next();
-
-    } catch (error) {
+    let payload = {};
+    try {
+        payload = jwt.decode(userToken,process.env.SECRET_KEY)
+        
+    } catch (err) {
+        return res.json({error: 'El token es incorrecto'});
         
     }
+    if(payload.expiredAt<moment().unix()){
+        return res.json({error: 'El token ha expirado'});
+    }
+     req.usuarioId =payload.usuarioId;
+     req.usuarioNombre= payload.nombre;
+    next();
+
+    
+        
+    
 
 } 
